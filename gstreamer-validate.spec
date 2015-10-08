@@ -3,23 +3,25 @@
 Summary:	GstValidate - suite of tools to run GStreamer integration tests
 Summary(pl.UTF-8):	GstValidate - zestaw narzędzi do uruchamiania testów integracyjnych GStreamera
 Name:		gstreamer-validate
-Version:	1.4.0
+Version:	1.6.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	http://gstreamer.freedesktop.org/src/gst-validate/gst-validate-%{version}.tar.xz
-# Source0-md5:	f85b335f39a29c1ebee231bd17767b4e
+# Source0-md5:	39ccc35814b1aa1c6b200e42e0eda94b
 URL:		http://gstreamer.net/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
+BuildRequires:	cairo-devel
 BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 0.6.3
 BuildRequires:	gstreamer-devel >= %{gst_ver}
 BuildRequires:	gstreamer-plugins-base-devel >= %{gstpb_ver}
+BuildRequires:	gtk+3-devel >= 3.0
 BuildRequires:	gtk-doc >= 1.3
-BuildRequires:	libtool
-BuildRequires:	pkgconfig
+BuildRequires:	libtool >= 2:2.2.6
+BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRequires:	python >= 1:2.7.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -100,6 +102,8 @@ rm -rf $RPM_BUILD_ROOT
 
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
+# modules loaded through glib
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/validate/libgstvalidate*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -111,6 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/gst-validate-1.0
+%attr(755,root,root) %{_bindir}/gst-validate-images-check-1.0
 %attr(755,root,root) %{_bindir}/gst-validate-launcher
 %attr(755,root,root) %{_bindir}/gst-validate-media-check-1.0
 %attr(755,root,root) %{_bindir}/gst-validate-transcoding-1.0
@@ -118,19 +123,32 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libgstvalidate-1.0.so.0
 %attr(755,root,root) %{_libdir}/libgstvalidate-default-overrides-1.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgstvalidate-default-overrides-1.0.so.0
+%attr(755,root,root) %{_libdir}/libgstvalidate_preload-1.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgstvalidate_preload-1.0.so.0
+%attr(755,root,root) %{_libdir}/libgstvalidatevideo-1.0.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgstvalidatevideo-1.0.so.0
 %{_libdir}/girepository-1.0/GstValidate-1.0.typelib
+%dir %{_libdir}/gstreamer-1.0/validate
+%attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidatefaultinjection.so
+%attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidategapplication.so
+%attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidategtk.so
+%attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidatessim.so
 %{_libdir}/gst-validate-launcher
 %dir %{_datadir}/gstreamer-1.0
-%{_datadir}/gstreamer-1.0/validate-scenario
+%{_datadir}/gstreamer-1.0/validate
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgstvalidate-1.0.so
 %attr(755,root,root) %{_libdir}/libgstvalidate-default-overrides-1.0.so
+%attr(755,root,root) %{_libdir}/libgstvalidate_preload-1.0.so
+%attr(755,root,root) %{_libdir}/libgstvalidatevideo-1.0.so
 %{_includedir}/gstreamer-1.0/gst/validate
+%{_includedir}/gstreamer-1.0/lib/validate
 %{_pkgconfigdir}/gst-validate-1.0.pc
 %{_datadir}/gir-1.0/GstValidate-1.0.gir
 
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/gst-validate-1.0
+%{_gtkdocdir}/gst-validate-plugins-1.0
