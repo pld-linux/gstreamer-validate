@@ -144,6 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgstvalidate_preload-1.0.so
 %attr(755,root,root) %{_libdir}/libgstvalidatevideo-1.0.so
 %{_includedir}/gstreamer-1.0/gst/validate
+%dir %{_includedir}/gstreamer-1.0/lib
 %{_includedir}/gstreamer-1.0/lib/validate
 %{_pkgconfigdir}/gst-validate-1.0.pc
 %{_datadir}/gir-1.0/GstValidate-1.0.gir
