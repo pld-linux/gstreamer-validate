@@ -1,15 +1,15 @@
-%define		gst_ver		1.0.0
-%define		gstpb_ver	1.0.0
+%define		gst_ver		1.8.0
+%define		gstpb_ver	1.8.0
 Summary:	GstValidate - suite of tools to run GStreamer integration tests
 Summary(pl.UTF-8):	GstValidate - zestaw narzędzi do uruchamiania testów integracyjnych GStreamera
 Name:		gstreamer-validate
-Version:	1.6.0
+Version:	1.8.1
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
-Source0:	http://gstreamer.freedesktop.org/src/gst-validate/gst-validate-%{version}.tar.xz
-# Source0-md5:	39ccc35814b1aa1c6b200e42e0eda94b
-URL:		http://gstreamer.net/
+Source0:	https://gstreamer.freedesktop.org/src/gst-validate/gst-validate-%{version}.tar.xz
+# Source0-md5:	e4224bd06fc3e8eb6c649a9eb4f2a923
+URL:		https://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	cairo-devel
@@ -103,7 +103,8 @@ rm -rf $RPM_BUILD_ROOT
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 # modules loaded through glib
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/validate/libgstvalidate*.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libgstvalidateplugin-*.la \
+	$RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/validate/libgstvalidate*.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -123,11 +124,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libgstvalidate-1.0.so.0
 %attr(755,root,root) %{_libdir}/libgstvalidate-default-overrides-1.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgstvalidate-default-overrides-1.0.so.0
-%attr(755,root,root) %{_libdir}/libgstvalidate_preload-1.0.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgstvalidate_preload-1.0.so.0
 %attr(755,root,root) %{_libdir}/libgstvalidatevideo-1.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgstvalidatevideo-1.0.so.0
 %{_libdir}/girepository-1.0/GstValidate-1.0.typelib
+%attr(755,root,root) %{_libdir}/gstreamer-1.0/libgstvalidateplugin-1.0.so*
 %dir %{_libdir}/gstreamer-1.0/validate
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidatefaultinjection.so
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidategapplication.so
@@ -141,7 +141,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgstvalidate-1.0.so
 %attr(755,root,root) %{_libdir}/libgstvalidate-default-overrides-1.0.so
-%attr(755,root,root) %{_libdir}/libgstvalidate_preload-1.0.so
 %attr(755,root,root) %{_libdir}/libgstvalidatevideo-1.0.so
 %{_includedir}/gstreamer-1.0/gst/validate
 %dir %{_includedir}/gstreamer-1.0/lib
