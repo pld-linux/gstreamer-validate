@@ -1,14 +1,14 @@
-%define		gst_ver		1.8.0
-%define		gstpb_ver	1.8.0
+%define		gst_ver		1.12.0
+%define		gstpb_ver	1.12.0
 Summary:	GstValidate - suite of tools to run GStreamer integration tests
 Summary(pl.UTF-8):	GstValidate - zestaw narzędzi do uruchamiania testów integracyjnych GStreamera
 Name:		gstreamer-validate
-Version:	1.8.1
+Version:	1.12.0
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://gstreamer.freedesktop.org/src/gst-validate/gst-validate-%{version}.tar.xz
-# Source0-md5:	e4224bd06fc3e8eb6c649a9eb4f2a923
+# Source0-md5:	eb1a0256dff768103de2899dac4a8860
 URL:		https://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
@@ -20,6 +20,7 @@ BuildRequires:	gstreamer-devel >= %{gst_ver}
 BuildRequires:	gstreamer-plugins-base-devel >= %{gstpb_ver}
 BuildRequires:	gtk+3-devel >= 3.0
 BuildRequires:	gtk-doc >= 1.3
+BuildRequires:	json-glib-devel >= 1.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRequires:	python >= 1:2.7.0
@@ -28,6 +29,7 @@ BuildRequires:	xz
 Requires:	glib2 >= 1:2.36.0
 Requires:	gstreamer >= %{gst_ver}
 Requires:	gstreamer-plugins-base >= %{gstpb_ver}
+Requires:	json-glib >= 1.0
 Requires:	python-modules >= 1:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -103,7 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 # obsoleted by pkg-config
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/lib*.la
 # modules loaded through glib
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libgstvalidateplugin-*.la \
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/libgstvalidatetracer.la \
 	$RPM_BUILD_ROOT%{_libdir}/gstreamer-1.0/validate/libgstvalidate*.la
 
 %clean
@@ -127,7 +129,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgstvalidatevideo-1.0.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgstvalidatevideo-1.0.so.0
 %{_libdir}/girepository-1.0/GstValidate-1.0.typelib
-%attr(755,root,root) %{_libdir}/gstreamer-1.0/libgstvalidateplugin-1.0.so*
+%attr(755,root,root) %{_libdir}/gstreamer-1.0/libgstvalidatetracer.so
 %dir %{_libdir}/gstreamer-1.0/validate
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidatefaultinjection.so
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidategapplication.so
