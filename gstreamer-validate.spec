@@ -1,14 +1,14 @@
-%define		gst_ver		1.12.0
-%define		gstpb_ver	1.12.0
+%define		gst_ver		1.14.0
+%define		gstpb_ver	1.14.0
 Summary:	GstValidate - suite of tools to run GStreamer integration tests
 Summary(pl.UTF-8):	GstValidate - zestaw narzędzi do uruchamiania testów integracyjnych GStreamera
 Name:		gstreamer-validate
-Version:	1.12.4
-Release:	2
+Version:	1.14.4
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://gstreamer.freedesktop.org/src/gst-validate/gst-validate-%{version}.tar.xz
-# Source0-md5:	bc074d49677081f9c27de11a09165746
+# Source0-md5:	1f4fc5308695adfdc11d13046aa4888c
 URL:		https://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
