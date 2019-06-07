@@ -1,14 +1,14 @@
-%define		gst_ver		1.14.0
-%define		gstpb_ver	1.14.0
+%define		gst_ver		1.16.0
+%define		gstpb_ver	1.16.0
 Summary:	GstValidate - suite of tools to run GStreamer integration tests
 Summary(pl.UTF-8):	GstValidate - zestaw narzędzi do uruchamiania testów integracyjnych GStreamera
 Name:		gstreamer-validate
-Version:	1.14.4
-Release:	2
+Version:	1.16.0
+Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://gstreamer.freedesktop.org/src/gst-validate/gst-validate-%{version}.tar.xz
-# Source0-md5:	1f4fc5308695adfdc11d13046aa4888c
+# Source0-md5:	c5c57f3325a2e62aae4a8ec4931f7711
 URL:		https://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
@@ -18,6 +18,7 @@ BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 0.6.3
 BuildRequires:	gstreamer-devel >= %{gst_ver}
 BuildRequires:	gstreamer-plugins-base-devel >= %{gstpb_ver}
+BuildRequires:	gstreamer-rtsp-server-devel >= %{gst_ver}
 BuildRequires:	gtk+3-devel >= 3.0
 BuildRequires:	gtk-doc >= 1.3
 BuildRequires:	json-glib-devel >= 1.0
@@ -135,6 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidatefaultinjection.so
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidategapplication.so
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidategtk.so
+%attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidateflow.so
 %attr(755,root,root) %{_libdir}/gstreamer-1.0/validate/libgstvalidatessim.so
 %{_libdir}/gst-validate-launcher
 %dir %{_datadir}/gstreamer-1.0
