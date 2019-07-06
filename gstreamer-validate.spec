@@ -30,6 +30,7 @@ BuildRequires:	xz
 Requires:	glib2 >= 1:2.36.0
 Requires:	gstreamer >= %{gst_ver}
 Requires:	gstreamer-plugins-base >= %{gstpb_ver}
+Requires:	gstreamer-rtsp-server >= %{gst_ver}
 Requires:	json-glib >= 1.0
 Requires:	python-modules >= 1:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
