@@ -1,14 +1,14 @@
-%define		gst_ver		1.16.0
-%define		gstpb_ver	1.16.0
+%define		gst_ver		1.16.2
+%define		gstpb_ver	1.16.2
 Summary:	GstValidate - suite of tools to run GStreamer integration tests
 Summary(pl.UTF-8):	GstValidate - zestaw narzędzi do uruchamiania testów integracyjnych GStreamera
 Name:		gstreamer-validate
-Version:	1.16.0
+Version:	1.16.2
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://gstreamer.freedesktop.org/src/gst-validate/gst-validate-%{version}.tar.xz
-# Source0-md5:	c5c57f3325a2e62aae4a8ec4931f7711
+# Source0-md5:	688f42c52d62e8c5e506df911553fb2c
 URL:		https://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
@@ -24,7 +24,8 @@ BuildRequires:	gtk-doc >= 1.3
 BuildRequires:	json-glib-devel >= 1.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	pkgconfig >= 1:0.9.0
-BuildRequires:	python >= 1:2.7.0
+BuildRequires:	python3 >= 1:3.4
+BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.36.0
@@ -32,7 +33,7 @@ Requires:	gstreamer >= %{gst_ver}
 Requires:	gstreamer-plugins-base >= %{gstpb_ver}
 Requires:	gstreamer-rtsp-server >= %{gst_ver}
 Requires:	json-glib >= 1.0
-Requires:	python-modules >= 1:2.7
+Requires:	python3-modules >= 1:3.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,7 +70,7 @@ Pliki nagłówkowe biblioteki GstValidate.
 Summary:	API documentation for GstValidate library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki GstValidate
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
+%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
 %endif
 
@@ -82,6 +83,8 @@ Dokumentacja API biblioteki GstValidate.
 %prep
 %setup -q -n gst-validate-%{version}
 
+%{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' tools/gst-validate-launcher.in
+
 %build
 %{__libtoolize}
 %{__aclocal} -I m4 -I common/m4
@@ -90,6 +93,7 @@ Dokumentacja API biblioteki GstValidate.
 %{__automake}
 # disable sphinx for now: docs/launcher/conf.py is missing
 %configure \
+	PYTHON=%{__python3} \
 	--enable-gtk-doc \
 	--disable-silent-rules \
 	--disable-sphinx-doc \
