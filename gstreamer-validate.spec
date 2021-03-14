@@ -1,14 +1,15 @@
-%define		gst_ver		1.16.2
-%define		gstpb_ver	1.16.2
+%define		gst_ver		1.16.3
+%define		gstpb_ver	1.16.3
+%define		gstrtsp_ver	%{gst_ver}
 Summary:	GstValidate - suite of tools to run GStreamer integration tests
 Summary(pl.UTF-8):	GstValidate - zestaw narzędzi do uruchamiania testów integracyjnych GStreamera
 Name:		gstreamer-validate
-Version:	1.16.2
+Version:	1.16.3
 Release:	1
 License:	LGPL v2.1+
 Group:		Libraries
 Source0:	https://gstreamer.freedesktop.org/src/gst-validate/gst-validate-%{version}.tar.xz
-# Source0-md5:	688f42c52d62e8c5e506df911553fb2c
+# Source0-md5:	740a436f5b9bf17ea7de0e62c92ec264
 URL:		https://gstreamer.freedesktop.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.11
@@ -18,20 +19,21 @@ BuildRequires:	glib2-devel >= 1:2.36.0
 BuildRequires:	gobject-introspection-devel >= 0.6.3
 BuildRequires:	gstreamer-devel >= %{gst_ver}
 BuildRequires:	gstreamer-plugins-base-devel >= %{gstpb_ver}
-BuildRequires:	gstreamer-rtsp-server-devel >= %{gst_ver}
+BuildRequires:	gstreamer-rtsp-server-devel >= %{gstrtsp_ver}
 BuildRequires:	gtk+3-devel >= 3.0
 BuildRequires:	gtk-doc >= 1.3
 BuildRequires:	json-glib-devel >= 1.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRequires:	python3 >= 1:3.4
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires:	glib2 >= 1:2.36.0
 Requires:	gstreamer >= %{gst_ver}
 Requires:	gstreamer-plugins-base >= %{gstpb_ver}
-Requires:	gstreamer-rtsp-server >= %{gst_ver}
+Requires:	gstreamer-rtsp-server >= %{gstrtsp_ver}
 Requires:	json-glib >= 1.0
 Requires:	python3-modules >= 1:3.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
